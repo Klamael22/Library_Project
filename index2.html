@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library App</title>
+    <link rel="stylesheet" href="style2.css">
+    <script type="text/javascript" src="script.js" defer></script>
+</head>
+
+<body>
+    
+    <div id="container">
+        <div id="addABook">
+
+            <label for="title">Enter book title:</label>
+            <input data-title type="text">
+            <label for="author">Enter Author:</label>
+            <input data-author type="text">
+            <label for="pages">Number of Pages:</label>
+            <input data-pages type="text">
+            <div id="radio-buttons">
+                <label for="read">Read</label>
+                <input data-read type="radio" name="readit" value="Yes">
+                <label for="notread">Not Read</label>
+                <input data-not-read type="radio" name="readit" value="No">
+
+            </div>
+            <button data-add-button>Add a Book</button>
+        </div>
+        <div id="table">
+            <table data-table>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Number of Pages</th>
+                    <th>Read?</th>
+                    <th></th>
+                </tr>
+                
+            </table>
+        </div>
+
+    </div>
+</body>
+
+</html>
