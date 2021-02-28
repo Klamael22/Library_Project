@@ -1,43 +1,26 @@
-body{
-    display: grid;
-    grid-template-rows: 80px 20px;
+body {
     padding: 0;
     margin: 0;
     height: 100vh;
     width: 90vw;
     background: linear-gradient(to right, rgba(243, 158, 0, 0.8), rgba(97, 0, 0, 0.6));
-    
 }
 
 #container {
-    height: 100px;
-    display: flex;
-    flex-direction: row;
-   
-    align-content: flex-start;
-    
-}
-#addABook {
-    min-width: 190px;
-    max-width: 10%;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    
-}
-#table {
-    min-width: 600px;  
-    padding-left: 50px;
-    
 }
 
-button{
-    
-    width: auto;
-
+#addABook {
+    width: 190px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
 }
-table{
 
+table {
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.4);
     border-collapse: collapse;
@@ -54,5 +37,4 @@ th {
 td {
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.4);
-
 }
