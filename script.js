@@ -19,13 +19,7 @@ document.addEventListener('click', function(e) {
         changeReadIt(e);
     }
 })
-function changeReadIt(e){
-    if(e.target.innerHTML == 'Yes'){
-        e.target.innerHTML = 'No'
-    } else {
-        e.target.innerHTML = 'Yes'
-    }
-}
+
 
 
 function Book(title, author, pages, readIt, delBtn) {
@@ -101,11 +95,8 @@ function updateTable() {
 }
 
 function deleteThisBook(x) {
-    myLibrary.splice(x, 1);
-    console.log(myLibrary.length);
-    
+    myLibrary.splice(x, 1);    
     updateTable();
-
 };
 
 function clearTable() {
@@ -113,20 +104,15 @@ function clearTable() {
     while (tableRows.length > 0) {
         tableRows[0].parentNode.removeChild(tableRows[0]);
     }
-    
-    
-    /*
-    if(table.contains()){return}
-    for (var i = 0; i < myLibrary.length; i++) {
-        table.removeChild(table.lastChild);
-    }
-    */
 }
 
-
-
-
-
+function changeReadIt(e){
+    if(e.target.innerHTML == 'Yes'){
+        e.target.innerHTML = 'No'
+    } else {
+        e.target.innerHTML = 'Yes'
+    }
+}
 
 function clearForm() {
     document.querySelector('[data-title]').value = '';
