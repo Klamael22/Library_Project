@@ -16,7 +16,8 @@ document.addEventListener('click', function (e) {
 })
 document.addEventListener('click', function(e) {
     if (e.target && e.target.hasAttribute('data-read-it')) {
-        changeReadIt(e);
+        let readItBtnIndex = e.target.getAttribute('data-read-it')
+        changeReadIt(readItBtnIndex);
     }
 })
 
@@ -73,7 +74,7 @@ function updateTable() {
         let newReadIt = document.createElement('td');
         let readItBtn = document.createElement('button');
         readItBtn.innerHTML = myLibrary[i].readIt;
-        readItBtn.setAttribute('data-read-it','');
+        readItBtn.setAttribute('data-read-it', `${i}`);
         newReadIt.appendChild(readItBtn);
 
         let newDelBtnTD = document.createElement('td');
@@ -106,12 +107,13 @@ function clearTable() {
     }
 }
 
-function changeReadIt(e){
-    if(e.target.innerHTML == 'Yes'){
-        e.target.innerHTML = 'No'
+function changeReadIt(x){
+    if(myLibrary[x].readIt == 'Yes') {
+        myLibrary[x].readIt = 'No'
     } else {
-        e.target.innerHTML = 'Yes'
+        myLibrary[x].readIt = 'Yes'
     }
+    updateTable();
 }
 
 function clearForm() {
