@@ -76,27 +76,16 @@ function createNewRow() {
     deleteButton.innerHTML = "delete";
     deleteEntry.appendChild(deleteButton);
     newRow.appendChild(deleteEntry);
-    console.log(myLibrary)
     clearForm();
 }
 
 function deleteThisBook(x) {
-
     let dataRows = document.querySelectorAll('[data-row]')
-
     myLibrary.splice(x, 1);
-
-
     table.removeChild(dataRows[x]);
-
-
-
-
     for (var i = 0; i < (myLibrary.length) - 1; i++) {
-        dataRows.forEach(row => {
-            row.setAttribute('data-row', `${i}`)
-            row.setAttribute('data-delete', `${i}`)
-        })
+        dataRows[i].setAttribute('data-row', `${i}`);
+        dataRows[i].setAttribute('data-delete', `${i}`);
     }
 
 };
