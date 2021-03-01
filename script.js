@@ -1,4 +1,5 @@
 let myLibrary = [];
+let createdRows = [];
 const table = document.querySelector('[data-table]');
 const addButton = document.querySelector('[data-add-button]');
 const radio = document.getElementsByName('readit');
@@ -13,24 +14,36 @@ document.addEventListener('click', function (e) {
         deleteThisBook(delBtnIndex);
     }
 })
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.hasAttribute('data-read-it')) {
+        changeReadIt(e);
+    }
+})
+function changeReadIt(e){
+    if(e.target.innerHTML == 'Yes'){
+        e.target.innerHTML = 'No'
+    } else {
+        e.target.innerHTML = 'Yes'
+    }
+}
 
 
-
-function Book(title, author, pages, readIt) {
+function Book(title, author, pages, readIt, delBtn) {
     //constructor
+
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.readIt = readIt;
-    clearForm()
+    this.delBtn = delBtn;
+
 }
 
 function addBookToLibrary() {
-
-    title = document.querySelector('[data-title]').value;
-    author = document.querySelector('[data-author]').value;
-    pages = document.querySelector('[data-pages]').value;
-    readIt = '';
+    let title = document.querySelector('[data-title]').value;
+    let author = document.querySelector('[data-author]').value;
+    let pages = document.querySelector('[data-pages]').value;
+    let readIt = '';
 
     for (var i = 0; i < radio.length; i++) {
         if (radio[i].checked)
@@ -40,55 +53,75 @@ function addBookToLibrary() {
 
     const newBook = new Book(title, author, pages, readIt);
     myLibrary.push(newBook);
+    
+    updateTable();
+    
 
-    createNewRow(myLibrary);
 }
 
-function createNewRow() {
+function updateTable() {
+    
+    clearTable();
+    
+    for (var i = 0; i < myLibrary.length; i++) {
+        let newRow = document.createElement('tr');
+        newRow.setAttribute('class', 'new-book-row')
 
-    let libraryLength = myLibrary.length;
-    let libraryIndex = libraryLength - 1;
+        let newTitle = document.createElement('td');
+        newTitle.innerHTML = myLibrary[i].title;
 
-    let newRow = document.createElement('tr');
-    newRow.setAttribute('data-row', `${libraryIndex}`)
-    table.appendChild(newRow);
+        let newAuthor = document.createElement('td');
+        newAuthor.innerHTML = myLibrary[i].author;
 
-    let newTitle = document.createElement('td');
-    newTitle.innerHTML = myLibrary[libraryIndex].title;
-    newRow.appendChild(newTitle);
+        let newPages = document.createElement('td');
+        newPages.innerHTML = myLibrary[i].pages;
 
-    let newAuthor = document.createElement('td');
-    newAuthor.innerHTML = myLibrary[libraryIndex].author;
-    newRow.appendChild(newAuthor);
+        let newReadIt = document.createElement('td');
+        let readItBtn = document.createElement('button');
+        readItBtn.innerHTML = myLibrary[i].readIt;
+        readItBtn.setAttribute('data-read-it','');
+        newReadIt.appendChild(readItBtn);
 
-    let newPages = document.createElement('td');
-    newPages.innerHTML = myLibrary[libraryIndex].pages;
-    newRow.appendChild(newPages);
+        let newDelBtnTD = document.createElement('td');
+        let newDelBtn = document.createElement('button');
+        newDelBtn.innerHTML = 'Delete';
+        newDelBtn.setAttribute('data-delete', `${i}`)
+        newDelBtnTD.appendChild(newDelBtn);
 
-    let newReadIt = document.createElement('td');
-    newReadIt.innerHTML = myLibrary[libraryIndex].readIt;
-    newRow.appendChild(newReadIt);
 
-    let deleteEntry = document.createElement('td');
-    let deleteButton = document.createElement('button');
-    deleteButton.setAttribute('class', 'delete-button',);
-    deleteButton.setAttribute('data-delete', `${libraryIndex}`);
-    deleteButton.innerHTML = "delete";
-    deleteEntry.appendChild(deleteButton);
-    newRow.appendChild(deleteEntry);
+        newRow.appendChild(newTitle);
+        newRow.appendChild(newAuthor);
+        newRow.appendChild(newPages);
+        newRow.appendChild(newReadIt);
+        newRow.appendChild(newDelBtnTD);
+
+        table.appendChild(newRow);
+    }
     clearForm();
 }
 
 function deleteThisBook(x) {
-    let dataRows = document.querySelectorAll('[data-row]')
     myLibrary.splice(x, 1);
-    table.removeChild(dataRows[x]);
-    for (var i = 0; i < (myLibrary.length) - 1; i++) {
-        dataRows[i].setAttribute('data-row', `${i}`);
-        dataRows[i].setAttribute('data-delete', `${i}`);
-    }
+    console.log(myLibrary.length);
+    
+    updateTable();
 
 };
+
+function clearTable() {
+    let tableRows = table.getElementsByClassName('new-book-row');
+    while (tableRows.length > 0) {
+        tableRows[0].parentNode.removeChild(tableRows[0]);
+    }
+    
+    
+    /*
+    if(table.contains()){return}
+    for (var i = 0; i < myLibrary.length; i++) {
+        table.removeChild(table.lastChild);
+    }
+    */
+}
 
 
 
